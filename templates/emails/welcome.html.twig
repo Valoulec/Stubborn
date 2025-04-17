@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenue chez Stubborn</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            padding: 40px;
+        }
+        .email-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .btn {
+            background-color: #000;
+            color: #fff;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <h2>Bienvenue {{ user.email }} 👋</h2>
+    <p>Merci de vous être inscrit sur <strong>Stubborn</strong> !</p>
+    <p>Nous sommes ravis de vous avoir pour client. Préparez-vous à recevoir nos meilleurs sweats 🔥</p>
+    <a href="/" class="btn">Visiter la boutique</a>
+    <p style="margin-top: 40px; font-size: 12px; color: #888;">Cet email est automatique, merci de ne pas y répondre.</p>
+</div>
+</body>
+</html>

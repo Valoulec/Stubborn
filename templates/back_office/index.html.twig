@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BackOffice{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+
+    <div class="card shadow-sm border border-danger mb-5">
+        <div class="card-body bg-danger bg-opacity-25">
+            <form action="{{ path('admin_add_product') }}" method="post" enctype="multipart/form-data">
+                <div class="row align-items-center">
+                    <!-- Image -->
+                    <div class="col-md-2 text-center mb-3 mb-md-0">
+                        <input type="file" name="image" class="form-control" required>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row fw-bold text-center mb-2">
+                            <div class="col">Nom</div>
+                            <div class="col">Prix</div>
+                            <div class="col">XS</div>
+                            <div class="col">S</div>
+                            <div class="col">M</div>
+                            <div class="col">L</div>
+                            <div class="col">XL</div>
+                        </div>
+                        <div class="row text-center mb-3">
+                            <div class="col"><input type="text" name="name" class="form-control" required></div>
+                            <div class="col"><input type="number" name="price" class="form-control" step="0.01" required></div>
+                            <div class="col"><input type="number" name="stock_xs" class="form-control" min="0" required></div>
+                            <div class="col"><input type="number" name="stock_s" class="form-control" min="0" required></div>
+                            <div class="col"><input type="number" name="stock_m" class="form-control" min="0" required></div>
+                            <div class="col"><input type="number" name="stock_l" class="form-control" min="0" required></div>
+                            <div class="col"><input type="number" name="stock_xl" class="form-control" min="0" required></div>
+                        </div>
+                        <div class="text-end mt-2">
+                            <button type="submit" class="btn btn-success fw-bold px-4 py-2">AJOUTER</button>
+                        </div>                                                
+                    </div>
+                </div>
+                <input type="hidden" name="_token" value="{{ csrf_token('add_product') }}">
+            </form>
+        </div>
+    </div>
+    {% for product in products %}
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center mb-3 mb-md-0">
+                        <img src="{{ asset('images/' ~ product.image) }}" class="img-fluid rounded" alt="{{ product.name }}">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row fw-bold text-center mb-2">
+                            <div class="col">Nom</div>
+                            <div class="col">Prix</div>
+                            <div class="col">XS</div>
+                            <div class="col">S</div>
+                            <div class="col">M</div>
+                            <div class="col">L</div>
+                            <div class="col">XL</div>
+                        </div>
+                        <div class="row text-center mb-3">
+                            <div class="col"><input type="text" class="form-control" value="{{ product.name }}" disabled></div>
+                            <div class="col"><input type="text" class="form-control" value="{{ product.price }} €" disabled></div>
+                            <div class="col"><input type="text" class="form-control" value="{{ product.getStockForSize('XS') }}" disabled></div>
+                            <div class="col"><input type="text" class="form-control" value="{{ product.getStockForSize('S') }}" disabled></div>
+                            <div class="col"><input type="text" class="form-control" value="{{ product.getStockForSize('M') }}" disabled></div>
+                            <div class="col"><input type="text" class="form-control" value="{{ product.getStockForSize('L') }}" disabled></div>
+                            <div class="col"><input type="text" class="form-control" value="{{ product.getStockForSize('XL') }}" disabled></div>
+                        </div>
+                        <div class="text-end mt-2 d-flex justify-content-end gap-2">
+                            <a href="{{ path('admin_edit_product', { id: product.id }) }}" class="btn btn-primary fw-bold px-4 py-2">MODIFIER</a>
+                        
+                            <form action="{{ path('admin_delete_product', { id: product.id }) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
+                                <button type="submit" class="btn btn-danger fw-bold px-4 py-2">SUPPRIMER</button>
+                            </form>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p class="text-center">Aucun produit trouvé.</p>
+    {% endfor %}
+</div>
+{% endblock %}

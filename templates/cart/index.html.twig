@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre Panier{% endblock %}
+
+{% block body %}
+<style>
+    .content {
+        flex: 1;
+        min-height: 100vh;
+    }
+    .bordure {
+        border: 1px solid red;
+    }
+</style>
+<main class="container my-5 flex-grow-1 ">
+    <h2 class="text-center">Votre Panier</h2>
+
+    {% if cart is empty %}
+    <div class="d-flex justify-content-center align-items-center" style="height: 60vh;">
+        <p class="text-center fs-4">Votre panier est vide.</p>
+    </div>
+    
+    {% else %}
+        <div class="cart-items">
+            {% for id, item in cart %}
+                <div class="cart-item border p-3 my-3 d-flex align-items-center">
+                    <img src="{{ asset('images/' ~ item.image) }}" alt="{{ item.name }}" class="img-thumbnail me-3" style="width: 100px; height: 100px;">
+                    <div class="flex-grow-1">
+                        <h5>{{ item.name }}</h5>
+                        <p>Prix: {{ item.price }} €</p>
+                        <p>Taille: {{ item.size }}</p>
+                    </div>
+                    <a href="{{ path('cart_remove', { id: id }) }}" class="btn btn-outline-danger">
+                        Retirer du panier
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="cart-total mt-4 text-end">
+            <div class="d-flex justify-content-end align-items-center gap-3 flex-wrap">
+                <div class="bordure rounded px-3 py-2">
+                    <h4 class="mb-0">TOTAL: {{ total }} €</h4>
+                </div>
+                <form action="/payment-stripe" method="POST" class="mb-0">
+                    <button type="submit" class="btn btn-danger">
+                        Finaliser ma commande
+                    </button>
+                </form>
+            </div>
+            <div class="mt-2">
+                <a href="/products" class="btn btn-success">Continuer mes achats</a>
+            </div>
+        </div>
+        
+        
+    {% endif %}
+</main>
+{% endblock %}

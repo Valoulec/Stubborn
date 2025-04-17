@@ -1,19 +1,116 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}{% endblock %} - Stubborn</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+        <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+        {% block stylesheets %}{% endblock %}
+        {% block javascripts %}{% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <style>
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 100% de la hauteur de la fenêtre */
+}
+
+.content {
+    flex: 1; /* Pousse le footer en bas */
+}
+
+.footer {
+    background-color: #f8f9fa; /* Couleur de fond */
+    text-align: center;
+    padding: 15px;
+}
+
+        .logo {
+            width: 200px;
+            height: auto;
+        }
+        .container-fluid {
+            background-color: aquamarine;
+        }
+        .navbar{
+            padding: 0;
+        }
+        .navbar-collapse {
+            justify-content: flex-end;
+        }
+        .nav-link{
+            color: red;
+            font-size: 20px;
+        }
+        footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: aquamarine;
+            color: red;
+            padding: 10px;
+        }
+        .navbar-nav .nav-link.active {
+            font-weight: bold;
+            text-decoration: underline;
+            color: #ff5733; /* Mets la couleur que tu veux */
+        }
+        
+    </style>
+    <body class="d-flex flex-column min-vh-100">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ path('app_main') }}">
+                    <img src="{{ asset('images/Logo.png') }}" alt="Stubborn logo" class="logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a href="{{ path('app_main') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_main' %}active{% endif %}">
+                            Accueil
+                        </a>
+                        {% if app.user %}
+                            <a href="{{ path('product_list') }}" class="nav-link {% if app.request.attributes.get('_route') == 'product_list' %}active{% endif %}">
+                                Boutique
+                            </a>
+                            <a href="{{ path('cart') }}" class="nav-link {% if app.request.attributes.get('_route') == 'cart' %}active{% endif %}">
+                                Panier
+                            </a>
+                            <a href="{{ path('app_logout') }}" class="nav-link">
+                                Se déconnecter
+                            </a>
+                        {% else %}
+                            <a href="{{ path('app_register') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_register' %}active{% endif %}">
+                                S'inscrire
+                            </a>
+                            <a href="{{ path('app_login') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_login' %}active{% endif %}">
+                                Se connecter
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {% block body %}
+        {% endblock %}
+        <footer>
+          <h3>Nom de la société : Stubborn</h3>
+          <p>Adresse : Piccadilly Circus, London W1J 0DA, Royaume-Uni</p>
+          <p>Adresse de contact : stubborn@blabla.com</p>
+          <p>Slogan: Don't compromise on your look</p>
+        </footer>
     </body>
 </html>

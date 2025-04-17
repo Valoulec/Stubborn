@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('assets/css/detail.css') }}">
+{% endblock %}
+
+{% block title %}Détail du produit - {{ product.name }}{% endblock %}
+
+{% block body %}
+<style>
+    .taille{
+        padding-left: 20px;
+        width: 30%;
+    }
+    .product-image{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .card-img-top{
+        width: 50%;
+        height: auto;
+
+    }
+    .product-detail{
+        margin: 60px 150px;
+        padding: 50px;
+        border: 5px solid red;
+    }
+    .btn{
+        width: 45%;
+    }
+.title{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+</style>
+<main class="product-detail">
+    <div class="product-container d-flex">
+        <div class="product-image flex-grow-1">
+            <img src="{{ asset('images/' ~ product.image) }}" alt="{{ product.name }}" class="img-fluid border rounded card-img-top">
+        </div>
+
+        <div class="flex-grow-1 detail d-flex flex-column ">
+            <div class="d-flex flex-row detail">
+            <div class="product-info ">
+                <h2>{{ product.name }}</h2>
+                <p class="price"><strong>Prix :</strong> {{ product.price }} €</p>
+            </div >
+            <div class="col-md-12 mb-2 taille" >
+                <div class="p-3 border rounded bg-light">
+                    <h5 class="text-center">Taille</h5>
+                    <form action="/cart/add/{{ product.id }}" class="" method="POST">
+                        <div class="d-flex flex-column gap-2" id="size-options" data-toggle="buttons">
+                            {% for size in ['XS', 'S', 'M', 'L', 'XL'] %}
+                            <label class="btn btn-outline-primary w-100 text-center">
+                                <input type="radio" name="size" value="{{ size }}" autocomplete="off" class="d-none" required>
+                                {{ size }}
+                            </label>
+                        {% endfor %}
+                        </div>              
+                </div>
+            </div>
+            </div>
+                    <button type="submit" class="btn btn-primary">
+                     Ajouter au panier
+                    </button>
+            </form>    
+        </div>
+    </div>
+</main>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const labels = document.querySelectorAll('#size-options label');
+
+        labels.forEach(label => {
+            const input = label.querySelector('input[type="radio"]');
+
+            input.addEventListener('change', function () {
+                labels.forEach(l => l.classList.remove('active'));
+
+                if (input.checked) {
+                    label.classList.add('active');
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}

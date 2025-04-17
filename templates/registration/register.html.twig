@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 75vh;">
+    <div class="border p-4" style="width: 350px;">
+        <h5 class="mb-3">S'inscrire</h5>
+        <hr class="mb-4 mt-0" style="border: 1px solid aquamarine;">
+
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.name) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.adresse) }}
+            <div class="mt-5">
+            {{ form_row(registrationForm.plainPassword) }}
+            {{ form_row(registrationForm.confirmPassword) }}
+            </div>
+            <div class="d-grid my-3">
+                <button type="submit" class="btn btn-primary fw-bold">Créer un compte</button>
+            </div>
+            <hr class="mb-4 mt-0" style="border: 1px solid aquamarine;">
+        {{ form_end(registrationForm) }}
+
+        <div class="text-center mt-3">
+            <p class="mb-1">Déjà inscrit ?</p>
+            <a href="{{ path('app_login') }}" class="btn btn-info text-white fw-bold">Se Connecter</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

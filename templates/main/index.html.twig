@@ -1,0 +1,50 @@
+{% extends './base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+<style>
+    .container {
+        padding: 20px;
+    }
+</style>
+    <div class="container mt-4">
+        <div class="row">
+            {% if products is not empty %}
+                {% for product in products %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{ asset('images/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <p class="card-text">prix: {{ product.price }} €</p>
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <a href="/product/{{ product.id }}" class="btn btn-primary">Voir</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Aucun produit mis en avant pour le moment.</p>
+            {% endif %}
+        </div>
+        <div>
+           <p> Bienvenue chez Stubborn, la boutique en ligne qui célèbre l'individualité à travers une collection unique de sweatshirts. Nous ne sommes pas juste une boutique, nous sommes un mouvement. Un mouvement pour ceux qui osent défier les conventions, qui expriment leur personnalité avec audace et qui ne suivent pas la foule.</p>
+
+<h4>Notre Collection :</h4>
+
+<p>Chez Stubborn, vous trouverez plus qu'un simple sweat-shirt. Chaque pièce est conçue avec soin, utilisant des matériaux de qualité supérieure pour un confort optimal et une durabilité exceptionnelle. Nos designs, à la fois modernes et intemporels, reflètent une esthétique rebelle et sophistiquée. Des imprimés audacieux aux coupes originales, nos sweats sont conçus pour s'adapter à votre style unique, que vous soyez un artiste, un entrepreneur, un étudiant ou simplement quelqu'un qui aime se démarquer.</p>
+
+<h4>Plus que des vêtements :</h4>
+
+<p>Chez Stubborn, nous croyons en la puissance de l'expression personnelle. Nos sweatshirts ne sont pas seulement des vêtements, ce sont des déclarations. Ils sont le reflet de votre personnalité, de vos valeurs et de votre style de vie. En portant un Stubborn, vous rejoignez une communauté de personnes qui partagent les mêmes valeurs d'authenticité, d'indépendance et d'audace.</p>
+
+<h4>Rejoignez le mouvement :</h4>
+
+<p>Explorez notre collection dès aujourd'hui et trouvez le sweat-shirt qui incarne votre personnalité. Suivez-nous sur les réseaux sociaux pour découvrir les dernières nouveautés, les promotions exclusives et pour vous connecter avec notre communauté. Chez Stubborn, votre style est votre force. Soyez Stubborn.</p>
+        </div>
+    </div>
+    
+{% endblock %}
+

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 75vh;">
+    <div class="border p-4" style="width: 350px;">
+        <h5 class="mb-3">Se connecter</h5>
+        <hr class="mb-4 mt-0" style="border: 1px solid aquamarine;">
+
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">Le nom ou le mot de passe est invalide : veuillez réessayer.</div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="mb-3">
+                    Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                </div>
+            {% endif %}
+
+            <div class="mb-3">
+                <label for="inputUsername">Nom d'utilisateur :</label>
+                <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+            </div>
+
+            <div class="mb-3">
+                <label for="inputPassword">Mot de passe :</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+            </div>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <div class="d-grid my-3">
+                <button class="btn btn-primary fw-bold" type="submit">Se connecter</button>
+            </div>
+
+            <div class="text-center mb-3">
+                <a href="/reset-password">Mot de passe oublié ?</a>
+            </div>
+        </form>
+
+        <hr class="mb-4 mt-0" style="border: 1px solid aquamarine;">
+
+        <div class="text-center mt-3">
+            <p class="mb-1">Pas encore inscrit ?</p>
+            <a href="{{ path('app_register') }}" class="btn btn-info text-white fw-bold">Créer un compte</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

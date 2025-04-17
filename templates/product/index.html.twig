@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Produits{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="text-center">Boutique</h1>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="p-3 border rounded bg-light">
+                <h5>Fourchette de prix</h5>
+                <form method="get" action="{{ path('product_filter_by_price') }}">
+                    <div class="d-flex flex-column">
+                        <button type="submit" name="priceRange" value="10-29"
+                                class="btn btn-outline-primary mb-2 {% if app.request.get('priceRange') == '10-29' %}active{% endif %}">
+                            10 à 29 €
+                        </button>
+                        <button type="submit" name="priceRange" value="30-35"
+                                class="btn btn-outline-primary mb-2 {% if app.request.get('priceRange') == '30-35' %}active{% endif %}">
+                            30 à 35 €
+                        </button>
+                        <button type="submit" name="priceRange" value="35-50"
+                                class="btn btn-outline-primary {% if app.request.get('priceRange') == '35-50' %}active{% endif %}">
+                            35 à 50 €
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% for product in products %}
+            <div class="col-md-4 mb-4">
+                <div class="card border shadow-sm">
+                    <img src="{{ asset('images/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text"><strong>{{ product.price }} €</strong></p>
+                        <a href="/product/{{ product.id }}" class="btn btn-primary">VOIR</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
