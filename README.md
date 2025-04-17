@@ -22,7 +22,7 @@ Clonez le dépôt Git sur le serveur
 
 | bash |
 | :---- |
-| `git clone https://github.com/masterxamss/stubborn.git  cd stubborn` |
+| `git clone https://github.com/Valoulec/Stubborn.git, cd stubborn` |
 
 #### 
 
