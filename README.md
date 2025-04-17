@@ -36,7 +36,7 @@ Modifiez le fichier **.env** ou **.env.local** pour définir les variables néce
 
 Pour les tests, configurez le fichier **.env.test** avec les paramètres suivants :
 
-| env |
+| env.test |
 | :---- |
 | `DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/stubborn?serverVersion=8.0.32&charset=utf8mb4"` |
 
@@ -73,7 +73,7 @@ Lancez le serveur Symfony pour tester le projet :
 
 | bash |
 | :---- |
-| `composer start` |
+| `symfony server:start` |
 
 Cette commande :
 
