@@ -28,17 +28,22 @@ Clonez le dépôt Git sur le serveur
 
 #### **3\. Configuration des variables d'environnement**
 
-Modifiez le fichier **.env** ou **.env.local** pour définir les variables nécessaires :
+Créer le fichier **.env** ou **.env.local** pour définir les variables nécessaires :
 
 | env |
 | :---- |
 | `STRIPE_PUBLIC_KEY=your_stripe_public_key STRIPE_SECRET_KEY=your_stripe_secret_key DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/stubborn?serverVersion=8.0.32&charset=utf8mb4" MAILER_DSN=smtp://user:password@smtp.exemple.com:587` |
 
-Pour les tests, configurez le fichier **.env.test** avec les paramètres suivants :
+Pour les tests, créer le fichier **.env.test** avec les paramètres suivants :
 
 | env.test |
 | :---- |
-| `DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/stubborn?serverVersion=8.0.32&charset=utf8mb4"` |
+| `KERNEL_CLASS='App\Kernel'
+APP_SECRET='$ecretf0rt3st'
+SYMFONY_DEPRECATIONS_HELPER=999999
+PANTHER_APP_ENV=panther
+PANTHER_ERROR_SCREENSHOT_DIR=./var/error-screenshots
+APP_ENV=test` |
 
 #### 
 
