@@ -86,7 +86,8 @@
         ],
         
         "start": [
-            "@php bin/phpunit"
+            "php bin/phpunit",
+            "symfony server:start"
         ]
     },
     "conflict": {
