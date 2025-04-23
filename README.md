@@ -73,7 +73,7 @@ Lancez le serveur Symfony pour tester le projet :
 
 | bash |
 | :---- |
-| `symfony server:start` |
+| `composer start` |
 
 Cette commande :
 
